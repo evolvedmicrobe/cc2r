@@ -1,5 +1,5 @@
-PKG_CPPFLAGS =	-I../inst/include/  -IConsensusCore2/include/ --std=c++11 -Wno-unused-local-typedefs -force_load
-PKG_CXXFLAGS = -force_load
+PKG_CPPFLAGS =	-I../inst/include/  -IConsensusCore2/include/ --std=c++11 -Wno-unused-local-typedefs
+
 # The R extensions manual says we should specify a C++11 flag with this environmental variable
 #
 # CXX_STD = CXX11
@@ -20,7 +20,7 @@ PKG_CXXFLAGS = -force_load
 #
 # http://stackoverflow.com/questions/34211369/rcpp-library-wont-build-cant-find-compiler-on-ubuntu
 #
-PKG_LIBS=  -lpbconsensus -LConsensusCore2/ -lm
+PKG_LIBS=  -Wl,-force_load,./ConsensusCore2/libpbconsensus.a -LConsensusCore2/ -lm
 .PHONY: pbconsensus all
 
 all : $(SHLIB)

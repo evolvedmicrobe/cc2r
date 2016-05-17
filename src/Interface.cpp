@@ -52,7 +52,8 @@ NumericVector timesTwo(NumericVector x) {
   MonoMolecularIntegrator ai(longTpl, cfg, snr, mdl);
   ai.AddRead(MappedRead(MkRead(longRead, snr, mdl, pw), StrandEnum::FORWARD, 0,
                         longTpl.length(), true, true));
-  return ai.LL();
+  return NumericVector::create(ai.LL());
+
 }
 
 

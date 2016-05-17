@@ -1,5 +1,5 @@
 CFLAGS=-fPIC -Wall -I../../inst/include/ -I./include/ --std=c++11 -Wno-deprecated-register -Wno-unused-local-typedefs
-LDFLAGS=-force_load
+
 #MODULES := align matrix models poa
 #SRC_DIR   := $(addprefix src/,$(MODULES))
 
