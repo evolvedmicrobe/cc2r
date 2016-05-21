@@ -1,4 +1,4 @@
-CFLAGS=-fPIC -Wall -I../../inst/include/ -I./include/ --std=c++11 -Wno-deprecated-register -Wno-unused-local-typedefs
+CFLAGS=-fPIC -Wall -I../../inst/include/ -I./include/ --std=c++11 -Wno-deprecated-register -Wno-unused-local-typedefs -DNDEBUG
 
 #MODULES := align matrix models poa
 #SRC_DIR   := $(addprefix src/,$(MODULES))

@@ -6,8 +6,7 @@
 
 #include <pacbio/consensus/Integrator.h>
 #include <pacbio/consensus/Sequence.h>
-
-#include "ModelFactory.h"
+#include <pacbio/consensus/ModelFactory.h>
 
 namespace PacBio {
 namespace Consensus {
@@ -142,6 +141,20 @@ std::vector<double> AbstractIntegrator::ZScores() const
     }
     return results;
 }
+std::vector<std::pair<double, double>> AbstractIntegrator::NormalParameters() const
+{
+    std::vector<std::pair<double, double>> results;
+    results.reserve(evals_.size());
+    for (const auto& eval : evals_) {
+        if (eval) {
+            results.emplace_back(eval.NormalParameters());
+        } else {
+            auto nan = std::numeric_limits<double>::quiet_NaN();
+            results.emplace_back(std::pair<double, double>(nan, nan));
+        }
+    }
+    return results;
+}
 
 Mutation AbstractIntegrator::ReverseComplement(const Mutation& mut) const
 {
@@ -181,9 +194,9 @@ AddReadResult MonoMolecularIntegrator::AddRead(const MappedRead& read)
 
     else if (read.Strand == StrandEnum::REVERSE)
         return AbstractIntegrator::AddRead(
-            std::unique_ptr<AbstractTemplate>(
-                new VirtualTemplate(revTpl_, TemplateLength() - read.TemplateEnd,
-                                    TemplateLength() - read.TemplateStart, read.PinEnd, read.PinStart)),
+            std::unique_ptr<AbstractTemplate>(new VirtualTemplate(
+                revTpl_, TemplateLength() - read.TemplateEnd, TemplateLength() - read.TemplateStart,
+                read.PinEnd, read.PinStart)),
             read);
 
     throw std::invalid_argument("read is unmapped!");

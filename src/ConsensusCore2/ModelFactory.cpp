@@ -4,8 +4,7 @@
 
 #include <pacbio/consensus/Exceptions.h>
 #include <pacbio/consensus/ModelConfig.h>
-
-#include "ModelFactory.h"
+#include <pacbio/consensus/ModelFactory.h>
 
 namespace PacBio {
 namespace Consensus {

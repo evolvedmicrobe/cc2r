@@ -5,14 +5,31 @@
 
 using namespace Rcpp;
 
-// timesTwo
-NumericVector timesTwo(NumericVector x);
-RcppExport SEXP cc2r_timesTwo(SEXP xSEXP) {
+// getTransitionParameters
+DataFrame getTransitionParameters(std::string tpl, std::string mdl, NumericVector snrs);
+RcppExport SEXP cc2r_getTransitionParameters(SEXP tplSEXP, SEXP mdlSEXP, SEXP snrsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    __result = Rcpp::wrap(timesTwo(x));
+    Rcpp::traits::input_parameter< std::string >::type tpl(tplSEXP);
+    Rcpp::traits::input_parameter< std::string >::type mdl(mdlSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type snrs(snrsSEXP);
+    __result = Rcpp::wrap(getTransitionParameters(tpl, mdl, snrs));
+    return __result;
+END_RCPP
+}
+// getScore
+DataFrame getScore(std::string read, std::string tpl, std::string mdl, std::vector<int>& pws, NumericVector snrs);
+RcppExport SEXP cc2r_getScore(SEXP readSEXP, SEXP tplSEXP, SEXP mdlSEXP, SEXP pwsSEXP, SEXP snrsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::string >::type read(readSEXP);
+    Rcpp::traits::input_parameter< std::string >::type tpl(tplSEXP);
+    Rcpp::traits::input_parameter< std::string >::type mdl(mdlSEXP);
+    Rcpp::traits::input_parameter< std::vector<int>& >::type pws(pwsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type snrs(snrsSEXP);
+    __result = Rcpp::wrap(getScore(read, tpl, mdl, pws, snrs));
     return __result;
 END_RCPP
 }
